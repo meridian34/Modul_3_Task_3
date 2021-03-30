@@ -10,7 +10,7 @@ namespace Modul_3_Task_3
     {
         public async Task<string> WaitResult()
         {
-            var hello = await Task.Run(async () =>
+            var hello = Task.Factory.StartNew(async () =>
             {
                 var t = Task.Factory.StartNew(() =>
                 {
@@ -22,7 +22,7 @@ namespace Modul_3_Task_3
                 return t.Result;
             });
 
-            var world = await Task.Run(async () =>
+            var world = Task.Factory.StartNew(async () =>
             {
                 var t = Task.Factory.StartNew(() =>
                 {
@@ -32,7 +32,8 @@ namespace Modul_3_Task_3
                 await t;
                 return t.Result;
             });
-            return $"{hello} {world}";
+            await Task.WhenAll(hello, world);
+            return $"{hello.Result.Result} {world.Result.Result}";
         }
     }
 }

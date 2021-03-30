@@ -11,9 +11,10 @@ namespace Modul_3_Task_3
     {
         public async Task<string> WaitResult()
         {
-            var hello = await Task.Run(async () => await Task.FromResult(File.ReadAllText("hello.txt")));
-            var world = await Task.Run(async () => await Task.FromResult("World"));
-            return $"{hello} {world}";
+            var hello = Task.Run(async () => await Task.FromResult(File.ReadAllText("hello.txt")));
+            var world = Task.Run(async () => await Task.FromResult("World"));
+            await Task.WhenAll(hello, world);
+            return $"{hello.Result} {world.Result}";
         }
     }
 }

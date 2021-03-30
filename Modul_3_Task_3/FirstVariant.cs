@@ -10,9 +10,10 @@ namespace Modul_3_Task_3
     {
         public async Task<string> WaitResult()
         {
-            var hello = await ReadHelloAsync();
-            var world = await GetWordAsync();
-            return $"{hello} {world}";
+            var hello = ReadHelloAsync();
+            var world = GetWordAsync();
+            await Task.WhenAll(hello, world);
+            return $"{hello.Result} {world.Result}";
         }
 
         private async Task<string> ReadHelloAsync()
