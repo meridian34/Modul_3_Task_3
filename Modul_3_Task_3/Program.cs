@@ -2,11 +2,16 @@
 
 namespace Modul_3_Task_3
 {
-    class Program
+    public class Program
     {
-        static void Main(string[] args)
+        public static void Main()
         {
-            Console.WriteLine("Hello World!");
+            var first = new FirstVariant();
+            var second = new SecondVariant();
+            var third = new ThirdVariant();
+            Console.WriteLine(first.WaitResult().GetAwaiter().GetResult());
+            Console.WriteLine(second.WaitResult().GetAwaiter().GetResult());
+            Console.WriteLine(third.WaitResult().GetAwaiter().GetResult());
         }
     }
 }
